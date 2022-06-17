@@ -1,5 +1,10 @@
 plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
   
+  CI_90 <- plot_gradient_df %>%
+    group_by(time, site_label, site_name) %>%
+    summarize(pred_max_temp_f = quantile(pred_max_temp_f, probs = 0.95)) %>%
+    mutate(over_check = ifelse(pred_max_temp_f > 75, T, F))
+  
   # plot 1-day out predictions with mean prediction 
   plot_gradient_df %>%
     ggplot(
@@ -62,7 +67,14 @@ plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
     scale_y_continuous(position = "left",
                        breaks = seq(55, 75, by = 5)) +
     scale_x_date(breaks = scales::breaks_width("1 day"),
-                 labels = scales::label_date_short()) 
+                 labels = scales::label_date_short()) +
+    {
+      geom_rect(data = CI_90[CI_90$over_check == T,],
+                aes(ymax = pred_max_temp_f, ymin = 75,
+                    xmin = time-.3, xmax = time+.3),
+                fill = "red",
+                alpha = 0.4)
+    }
 
   
 }
