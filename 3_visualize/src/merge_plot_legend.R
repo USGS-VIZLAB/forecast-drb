@@ -8,7 +8,8 @@ merge_plot_legend <- function(main_plot, legend, out_file, show_all_predicted){
           axis.text.x = element_blank(),
           axis.line = element_blank(),
           axis.title.y = element_blank(),
-          axis.ticks = element_blank())
+          axis.ticks.x = element_blank(),
+          axis.ticks.y = element_blank())
   
   # Draw a blank spot "NULL" to put legend
   plot_grid(main_plot, NULL, rel_widths = c(5,1))+
@@ -21,11 +22,11 @@ merge_plot_legend <- function(main_plot, legend, out_file, show_all_predicted){
     draw_label("threshold", x = .96, y = .705, size = 6, colour = "orangered")+
     # and annotate mean
     draw_label("Mean", colour = "black", x = 0.95, y = 0.545, size = 7)+
-    annotate("segment", xend = 0.903, x = 0.92, yend = 0.545, y = 0.545, 
+    annotate("segment", xend = 0.905, x = 0.92, yend = 0.545, y = 0.545, 
              arrow = arrow(length = unit(0.1, "cm")), colour = "black")+
     # and 90% CI
-    draw_label("{", x = 0.9, y = 0.47, size = 20, angle = 180, color = "black")+
-    draw_label("\u00B1 90% CI", colour = "black", x = 0.95, y = 0.47, size = 7)+
+    draw_label("{", x = 0.9, y = 0.47, size = 18, angle = 180, color = "black")+
+    draw_label("\u00B1 90% CI", colour = "black", x = 0.95, y = 0.49, size = 7)+
     # and complete values
     {if(show_all_predicted == TRUE){
       draw_label("     Predicted \nvalues", x = 0.93, y = 0.3, 

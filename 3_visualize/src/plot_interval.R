@@ -53,24 +53,26 @@ plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
     # threshold line
     { if (max_temp >= 71) {
       geom_hline(yintercept = c_to_f(threshold),
-               linetype = "dashed",
+               linetype = "dotted",
                color = "orangered",
                size = .48,
                alpha = 0.8) 
         }}+
     theme(legend.position = "none",
-          axis.text = element_text(angle = 0, hjust = 0.5, size = 5),
+          axis.text = element_text(angle = 0, hjust = 0.5),
+          axis.text.x = element_text(size = 5),
+          axis.ticks.x = element_line(size = 0.3),
           strip.background = element_rect(color = NA, fill = NA),
           # color for axis labels
-          axis.text.y = element_text(size = 6, 
-                                     color = ifelse(breaks_draw == 75, "red", "black")),
-          axis.ticks.y = element_line(color = ifelse(breaks_draw == 75, "red", "black")),
+          axis.text.y = element_text(size = 5, color = ifelse(breaks_draw == 75, "red", "black")),
+          axis.ticks.y = element_line(color = ifelse(breaks_draw == 75, "red", "black"), size = 0.3),
           panel.background = element_rect(color="grey", fill = NA),
           axis.line = element_line(size = .5, color="gray"),
           strip.text = element_text(face = "bold"),
           # panel.grid left white marks over facet borders, removed with line below
           panel.grid = element_blank(),
-          axis.title.y = element_text(size = 8))+
+          axis.title.y = element_text(size = 8),
+          panel.spacing = unit(0,"lines"))+
     scale_y_continuous(position = "left",
                        breaks = seq(55, 75, by = 5)) +
     scale_x_date(breaks = scales::breaks_width("1 day"),

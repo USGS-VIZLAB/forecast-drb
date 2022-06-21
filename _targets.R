@@ -84,7 +84,7 @@ list(
     prep_gradient(ensemble_data = p1_ensemble_data, 
                   site_info = p2_site_info, 
                   date_start = as.Date("2021-06-28"), 
-                  days_shown = 6, 
+                  days_shown = 7, 
                   threshold = threshold_C)
   ),
   tar_target(
