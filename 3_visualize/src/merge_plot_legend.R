@@ -8,7 +8,8 @@ merge_plot_legend <- function(main_plot, legend, out_file, show_all_predicted){
           axis.text.x = element_blank(),
           axis.line = element_blank(),
           axis.title.y = element_blank(),
-          axis.ticks = element_blank())
+          axis.ticks.x = element_blank(),
+          axis.ticks.y = element_blank())
   
   # Draw a blank spot "NULL" to put legend
   plot_grid(main_plot, NULL, rel_widths = c(5,1))+
