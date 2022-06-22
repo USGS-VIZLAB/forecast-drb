@@ -8,4 +8,6 @@ This repo contains a lightweight `targets` pipeline to load data from the foreca
 
 ## Output
 
-INSERT VISUAL HERE
+The forecasts are displayed daily at the [DRB Stream Forecasts Webpage](https://labs.waterdata.usgs.gov/water-temperature-forecasts/DRB/2022/index.html).
+
+
