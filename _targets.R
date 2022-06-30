@@ -144,14 +144,16 @@ list(
     p3_daily_interval,
     plot_interval(p2_plot_gradient_df,
                   threshold = threshold_C,
-                  show_all_predicted = show_all_predicted)
+                  show_all_predicted = show_all_predicted,
+                  tworow_layout = F)
   ),
   tar_target(
     # create legend, filter to just one example date and location
     p3_daily_interval_legend,
     plot_interval(plot_gradient_df = readRDS(p2_plot_legend_file),
                   threshold = threshold_C,
-                  show_all_predicted = show_all_predicted)
+                  show_all_predicted = show_all_predicted,
+                  tworow_layout = F)
   ),
   tar_target(
     # save plot
@@ -159,7 +161,27 @@ list(
     merge_plot_legend(main_plot = p3_daily_interval,
                       legend = p3_daily_interval_legend,
                       show_all_predicted = show_all_predicted,
-                      out_file = "3_visualize/out/daily_interval.png"),
+                      out_file = "3_visualize/out/daily_interval.png",
+                      tworow_layout = F),
+    format = "file"
+  ),
+  
+  tar_target(
+    # create plot with 2-rows
+    p3_daily_interval_2row,
+    plot_interval(p2_plot_gradient_df,
+                  threshold = threshold_C,
+                  show_all_predicted = show_all_predicted,
+                  tworow_layout = T)
+  ),
+  tar_target(
+    # save plot
+    p3_daily_interval_2row_png,
+    merge_plot_legend(main_plot = p3_daily_interval_2row,
+                      legend = p3_daily_interval_legend,
+                      show_all_predicted = show_all_predicted,
+                      out_file = "3_visualize/out/daily_interval_2row.png",
+                      tworow_layout = T),
     format = "file"
   ),
   
