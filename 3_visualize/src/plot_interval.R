@@ -1,4 +1,4 @@
-plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
+plot_interval <- function(plot_gradient_df, threshold, show_all_predicted, tworow_layout){
   
   # Max temperature for check if it's within range of threshold
   max_temp <- plot_gradient_df %>%
@@ -17,9 +17,13 @@ plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
         group = site_name
       )) +
     labs(x = "",
-         y = "Max temperature (F)") +
-    # panel for each site
-    facet_grid(~ site_label) + {
+         y = "Max temperature (F)") + {
+           if(tworow_layout == T){
+             facet_wrap(~ site_label, ncol = 3, scales = "free_x")
+           } else{
+             facet_wrap(~ site_label, ncol = 5)
+           }
+         } + {
       # Turn off or on the full background of predicted values depending on argument
       if(show_all_predicted == TRUE){
         stat_gradientinterval(shape = NA,
@@ -72,7 +76,7 @@ plot_interval <- function(plot_gradient_df, threshold, show_all_predicted){
           # panel.grid left white marks over facet borders, removed with line below
           panel.grid = element_blank(),
           axis.title.y = element_text(size = 8),
-          panel.spacing = unit(0,"lines"))+
+          panel.spacing = unit(0, "lines"))+
     scale_y_continuous(position = "left",
                        breaks = seq(55, 75, by = 5)) +
     scale_x_date(breaks = scales::breaks_width("1 day"),
